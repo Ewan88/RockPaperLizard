@@ -1,16 +1,49 @@
 <template>
   <div id="app">
-    <Game/>
+    <playerSelect v-if="!playerHand" />
   </div>
 </template>
 
 <script>
-import Game from './components/Game.vue'
+import playerSelect from './components/PlayerSelect.vue'
+import { eventBus } from './main.js';
 
 export default {
   name: 'app',
   components: {
-    "Game": Game
+    "playerSelect": playerSelect
+  },
+  data() {
+    return {
+      playerHand: null,
+      hands: [
+        {
+          name: 'rock',
+          counters: ['lizard', 'scissors']
+        },
+        {
+          name: 'paper',
+          counters: ['rock', 'spock']
+        },
+        {
+          name: 'scissors',
+          counters: ['paper', 'lizard']
+        },
+        {
+          name: 'lizard',
+          counters: ['spock', 'paper']
+        },
+        {
+          name: 'spock',
+          counters: ['scissors', 'rock']
+        }
+      ],
+    }
+  },
+  mounted() {
+    eventBus.$on('player-select', (index) => {
+      this.playerHand = this.hands[index];
+    });
   }
 }
 </script>
