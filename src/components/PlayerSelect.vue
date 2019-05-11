@@ -1,5 +1,5 @@
 <template>
-  <div id="playerSelect">
+  <div id="gameContainer">
     <h2>Choose a hand</h2>
     <div class="top">
       <img src="../assets/rock.png" alt="rock"
@@ -38,12 +38,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-#playerSelect {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
 
 div.top {
   display: inline-flex;

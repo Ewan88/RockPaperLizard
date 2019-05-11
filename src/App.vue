@@ -6,12 +6,18 @@
       :playerHand="playerHand"
       :hands="hands"
     />
+    <play
+      v-if="playerHand && opponentHand"
+      :playerHand="playerHand"
+      :opponentHand="opponentHand"
+    />
   </div>
 </template>
 
 <script>
 import playerSelect from './components/PlayerSelect.vue'
 import opponentSelect from './components/OpponentSelect.vue'
+import play from './components/Play.vue'
 
 import { eventBus } from './main.js';
 
@@ -19,7 +25,8 @@ export default {
   name: 'app',
   components: {
     "playerSelect": playerSelect,
-    "opponentSelect": opponentSelect
+    "opponentSelect": opponentSelect,
+    "play": play
   },
   data() {
     return {
@@ -55,6 +62,10 @@ export default {
     }),
     eventBus.$on('opponent-select', (index) => {
       this.opponentHand = this.hands[index];
+    }),
+    eventBus.$on('restart-game', () => {
+      this.playerHand = null;
+      this.opponentHand = null;
     })
   }
 }
@@ -71,6 +82,12 @@ export default {
     justify-content: center;
     padding-top: 20px;
     margin: 0;
+  }
+
+  #gameContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
 
 </style>
