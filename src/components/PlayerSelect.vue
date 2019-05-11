@@ -2,20 +2,20 @@
   <div id="playerSelect">
     <h2>Choose a hand</h2>
     <div class="top">
-      <img id="rock" src="../assets/rock.png" alt="rock"
-      v-on:click="selectPlayerHand(0)">
+      <img src="../assets/rock.png" alt="rock"
+      v-on:click="selectHand(0)">
     </div>
     <div class="middle">
-      <img id="spock" src="../assets/spock.png" alt="spock"
-      v-on:click="selectPlayerHand(1)">
-      <img id="paper" src="../assets/paper.png" alt="paper"
-      v-on:click="selectPlayerHand(2)">
+      <img src="../assets/spock.png" alt="spock"
+      v-on:click="selectHand(4)">
+      <img src="../assets/paper.png" alt="paper"
+      v-on:click="selectHand(1)">
     </div>
     <div class="bottom">
-      <img id="lizard" src="../assets/lizard.png" alt="lizard"
-      v-on:click="selectPlayerHand(3)">
-      <img id="scissors" src="../assets/scissors.png" alt="scissors"
-      v-on:click="selectPlayerHand(4)">
+      <img src="../assets/lizard.png" alt="lizard"
+      v-on:click="selectHand(3)">
+      <img src="../assets/scissors.png" alt="scissors"
+      v-on:click="selectHand(2)">
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 
   },
   methods: {
-    selectPlayerHand(index) {
+    selectHand(index) {
       eventBus.$emit('player-select', index);
     }
   }
