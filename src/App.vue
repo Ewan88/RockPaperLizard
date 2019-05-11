@@ -88,6 +88,17 @@ export default {
     display: flex;
     flex-direction: column;
     text-align: center;
+    width: 300px;
+  }
+
+  img {
+    height: 100px;
+    width: auto;
+  }
+
+  #imageContainer {
+    display: inline-flex;
+    justify-content: space-between;
   }
 
 </style>

@@ -40,38 +40,28 @@ export default {
   methods: {
     selectOpponent() {
       let index = this.getRandomNumber(this.hands.length);
-      this.opponentHand = this.hands[index];
+
+      setTimeout(function () {
+        if (this.hands) {
+          this.opponentHand = this.hands[index];
+        }
+      }, 1000);
+
+
       setTimeout(function () {
         eventBus.$emit('opponent-select', index);
-      }, 3000);
+      }, 2000);
     },
-    getRandomNumber(n) {
-      return Math.floor(Math.random()*n);
-    },
-    wait(ms) {
-      let start = Date.now();
-      let end = start;
-      while (end < start + this.getRandomNumber(ms)) {
-        end = Date.now();
-      }
+    getRandomNumber(number) {
+      return Math.floor(Math.random() * number);
     },
   },
   mounted() {
     this.selectOpponent();
-  }
+  },
 }
 </script>
 
 <style scoped>
-
-img {
-  height: 100px;
-  width: auto;
-}
-
-#imageContainer {
-  display: inline-flex;
-  justify-content: space-between;
-}
 
 </style>

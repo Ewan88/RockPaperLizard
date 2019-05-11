@@ -41,27 +41,18 @@ export default {
 
 div.top {
   display: inline-flex;
-  margin-bottom: 10px;
-  display: inline-flex;
   align-self: center;
 }
 
 div.middle {
   display: inline-flex;
   margin-bottom: 30px;
-  width: 120%;
-  align-self: center;
   justify-content: space-between;
 }
 
 div.bottom {
   display: inline-flex;
-}
-
-img {
-  height: 100px;
-  width: auto;
-  padding: 0 20px;
+  justify-content: space-around;
 }
 
 img:hover {

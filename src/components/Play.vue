@@ -1,25 +1,41 @@
 <template>
   <div id="gameContainer">
-    <div id="won" v-if="gameState=='won'">
+    <div v-if="gameState=='won'">
       <h2>
         {{playerHand.name[0].toUpperCase() + playerHand.name.substring(1)}}
         {{getVerb(playerHand, opponentHand)}}
         {{opponentHand.name[0].toUpperCase() + opponentHand.name.substring(1)}}
       </h2>
-      <h3>You win!</h3>
     </div>
-    <div id="draw" v-if="gameState=='draw'">
+    <div v-if="gameState=='draw'">
       <h2>Draw!</h2>
     </div>
-    <div id="lost" v-if="gameState=='lost'">
+    <div v-if="gameState=='lost'">
       <h2>
         {{opponentHand.name[0].toUpperCase() + opponentHand.name.substring(1)}}
         {{getVerb(opponentHand, playerHand)}}
         {{playerHand.name[0].toUpperCase() + playerHand.name.substring(1)}}
       </h2>
-      <h3>You lose!</h3>
     </div>
-    <button id="restartGameBtn" v-on:click="restartGame">Play Again?</button>
+    <div id="imageContainer">
+      <div v-if="playerHand" id="playerImage">
+        <img v-if="playerHand.name=='rock'" src="../assets/rock.png" alt='rock'>
+        <img v-if="playerHand.name=='paper'" src="../assets/paper.png" alt='paper'>
+        <img v-if="playerHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
+        <img v-if="playerHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
+        <img v-if="playerHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+      </div>
+      <div v-if="opponentHand" id="opponentImage">
+        <img v-if="opponentHand.name=='rock'" src="../assets/rock.png" alt='rock'>
+        <img v-if="opponentHand.name=='paper'" src="../assets/paper.png" alt='paper'>
+        <img v-if="opponentHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
+        <img v-if="opponentHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
+        <img v-if="opponentHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+      </div>
+    </div>
+    <h3 v-if="gameState=='won'">You win!</h3>
+    <h3 v-if="gameState=='lost'">You lose!</h3>
+    <h3 id="restartGameBtn" v-on:click="restartGame">Play Again?</h3>
   </div>
 </template>
 
@@ -93,5 +109,10 @@ export default {
 </script>
 
 <style scoped>
+
+  #restartGameBtn:hover {
+    color: red;
+    cursor: pointer;
+  }
 
 </style>
