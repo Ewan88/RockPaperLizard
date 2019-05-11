@@ -80,7 +80,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding: 0;
     margin: 0;
   }
 
@@ -88,7 +88,12 @@ export default {
     display: flex;
     flex-direction: column;
     text-align: center;
+    padding: 20px;
+    margin: 50px;
     width: 300px;
+    height: 400px;
+    border-radius: 30px;
+    box-shadow: 0 0 50px;
   }
 
   img {

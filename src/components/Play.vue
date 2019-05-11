@@ -111,7 +111,7 @@ export default {
 <style scoped>
 
   #restartGameBtn:hover {
-    color: red;
+    color: grey;
     cursor: pointer;
   }
 
