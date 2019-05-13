@@ -113,7 +113,7 @@ img:hover {
 }
 
 .hidden {
-  transition-duration: 0.5s;
+  transition-duration: 1s;
   opacity: 0;
 }
 

@@ -1,9 +1,6 @@
 <template>
   <div id="gameContainer">
-    <h2 v-if="!opponentHand">Choosing opponent's hand...</h2>
-    <h2 v-if="opponentHand">
-      Your opponent selected {{opponentHand.name[0].toUpperCase() + opponentHand.name.substring(1)}}!
-    </h2>
+    <h2>Choosing opponent's hand...</h2>
     <div id="imageContainer">
       <div v-if="playerHand" id="playerImage">
         <img v-if="playerHand.name=='rock'" src="../assets/rock.png" alt='rock'>
@@ -12,12 +9,8 @@
         <img v-if="playerHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
         <img v-if="playerHand.name=='spock'" src="../assets/spock.png" alt='spock'>
       </div>
-      <div v-if="opponentHand" id="opponentImage">
-        <img v-if="opponentHand.name=='rock'" src="../assets/rock.png" alt='rock'>
-        <img v-if="opponentHand.name=='paper'" src="../assets/paper.png" alt='paper'>
-        <img v-if="opponentHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
-        <img v-if="opponentHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
-        <img v-if="opponentHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+      <div id="opponentImage">
+        <img :src="getImageUrl(currentImage)" alt='opponent'>
       </div>
     </div>
   </div>
@@ -34,7 +27,15 @@ export default {
   },
   data() {
     return {
-      opponentHand: null
+      images: [
+        "rock.png",
+        "paper.png",
+        "scissors.png",
+        "lizard.png",
+        "spock.png"
+      ],
+      currentImage: "rock.png",
+      imageChanges: 0,
     }
   },
   methods: {
@@ -42,26 +43,38 @@ export default {
       let index = this.getRandomNumber(this.hands.length);
 
       setTimeout(function () {
-        if (this.hands) {
-          this.opponentHand = this.hands[index];
-        }
-      }, 1000);
-
-
-      setTimeout(function () {
         eventBus.$emit('opponent-select', index);
       }, 2000);
     },
+
     getRandomNumber(number) {
       return Math.floor(Math.random() * number);
     },
+
+    getImageUrl(imageName) {
+      return require('../assets/' + imageName);
+    },
+
+    changeImage() {
+      let index = this.getRandomNumber(this.images.length);
+      this.currentImage = this.images[index];
+
+      /*
+      following block prevents an infinite loop
+      makes 25 recursive calls equating to 2 seconds
+      */
+
+      if (this.imageChanges < 26) {
+        setTimeout(() => {
+          this.changeImage();
+        }, 80);
+      }
+      this.imageChanges++;
+    }
   },
   mounted() {
     this.selectOpponent();
+    this.changeImage();
   },
 }
 </script>
-
-<style scoped>
-
-</style>
