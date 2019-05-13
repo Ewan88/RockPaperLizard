@@ -11,7 +11,10 @@
       :playerHand="playerHand"
       :opponentHand="opponentHand"
     />
-    <h5 id="counter">Games won: {{winCount}}</h5>
+    <h5 id="counter">
+      Games won: {{winCount}}
+      lost: {{lostCount}}
+    </h5>
   </div>
 </template>
 
@@ -55,7 +58,8 @@ export default {
           counters: ['scissors', 'rock'],
         }
       ],
-      winCount: 0
+      winCount: 0,
+      lostCount: 0,
     }
   },
   mounted() {
@@ -71,6 +75,9 @@ export default {
     }),
     eventBus.$on('game-won', () => {
       this.winCount++;
+    }),
+    eventBus.$on('game-lost', () => {
+      this.lostCount++;
     })
   }
 }
@@ -97,7 +104,7 @@ export default {
     padding: 20px;
     margin: 50px;
     width: 330px;
-    height: 450px;
+    height: 460px;
     border-radius: 30px;
     box-shadow: 0 0 50px red;
   }
@@ -108,6 +115,8 @@ export default {
     text-align: inherit;
     padding: 0;
     margin: 0;
+    width: auto;
+    height: 400px;
   }
 
   img {
