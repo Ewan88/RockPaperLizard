@@ -33,8 +33,8 @@
         <img v-if="opponentHand.name=='spock'" src="../assets/spock.png" alt='spock'>
       </div>
     </div>
-    <h3 v-if="gameState=='won'">You win!</h3>
-    <h3 v-if="gameState=='lost'">You lose!</h3>
+    <h3 v-if="gameState=='won'" id="result">You win!</h3>
+    <h3 v-if="gameState=='lost'" id="result">You lose!</h3>
     <h3 id="restartGameBtn" v-on:click="restartGame">Play Again?</h3>
   </div>
 </template>
@@ -110,9 +110,14 @@ export default {
 
 <style scoped>
 
+  #result {
+    color: red;
+  }
+
   #restartGameBtn:hover {
-    color: grey;
+    color: red;
     cursor: pointer;
   }
+
 
 </style>
