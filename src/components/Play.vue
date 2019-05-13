@@ -92,6 +92,7 @@ export default {
     setGameState() {
       if (this.playerHand.counters.includes(this.opponentHand.name)) {
         this.gameState = 'won';
+        eventBus.$emit('game-won');
       } else if (this.opponentHand.counters.includes(this.playerHand.name)) {
         this.gameState = 'lost';
       } else {

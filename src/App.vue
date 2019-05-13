@@ -11,6 +11,7 @@
       :playerHand="playerHand"
       :opponentHand="opponentHand"
     />
+    <h5 id="counter">Games won: {{winCount}}</h5>
   </div>
 </template>
 
@@ -54,6 +55,7 @@ export default {
           counters: ['scissors', 'rock'],
         }
       ],
+      winCount: 0
     }
   },
   mounted() {
@@ -66,6 +68,9 @@ export default {
     eventBus.$on('restart-game', () => {
       this.playerHand = null;
       this.opponentHand = null;
+    }),
+    eventBus.$on('game-won', () => {
+      this.winCount++;
     })
   }
 }
@@ -74,6 +79,7 @@ export default {
 <style>
 
   body {
+    font-family: sans-serif;
     background-color: black;
     color: white;
     display: flex;
@@ -84,16 +90,24 @@ export default {
     margin: 0;
   }
 
-  #gameContainer {
+  #app {
     display: flex;
     flex-direction: column;
     text-align: center;
     padding: 20px;
     margin: 50px;
-    width: 300px;
-    height: 400px;
+    width: 330px;
+    height: 450px;
     border-radius: 30px;
-    box-shadow: 0 0 50px;
+    box-shadow: 0 0 50px red;
+  }
+
+  #gameContainer {
+    display: inherit;
+    flex-direction: inherit;
+    text-align: inherit;
+    padding: 0;
+    margin: 0;
   }
 
   img {
@@ -104,6 +118,10 @@ export default {
   #imageContainer {
     display: inline-flex;
     justify-content: space-between;
+  }
+
+  #counter {
+    position: relative;
   }
 
 </style>

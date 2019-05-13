@@ -1,6 +1,6 @@
 <template>
   <div id="gameContainer">
-    <h2>Choose a hand</h2>
+    <h2>Choose a hand!</h2>
     <div class="top">
       <img id="rock"
         :class="{'clicked': clicked.rock, 'hidden': hidden.rock}"
@@ -118,19 +118,19 @@ img:hover {
 }
 
 #rock.clicked {
-  transform: translate(-114px, 0);
+  transform: translate(-129px, 0);
 }
 
 #paper.clicked {
-  transform: translate(-200px, -100px);
+  transform: translate(-230px, -100px);
 }
 
 #scissors.clicked {
-  transform: translate(-192px, -230px);
+  transform: translate(-215px, -230px);
 }
 
 #lizard.clicked {
-  transform: translate(-30px, -230px);
+  transform: translate(-37px, -230px);
 }
 
 #spock.clicked {
