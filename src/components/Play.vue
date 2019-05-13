@@ -19,18 +19,14 @@
     </div>
     <div id="imageContainer">
       <div v-if="playerHand" id="playerImage">
-        <img v-if="playerHand.name=='rock'" src="../assets/rock.png" alt='rock'>
-        <img v-if="playerHand.name=='paper'" src="../assets/paper.png" alt='paper'>
-        <img v-if="playerHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
-        <img v-if="playerHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
-        <img v-if="playerHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+        <img v-if="playerHand"
+          :src="getImageUrl(playerHand.image)" alt='player'
+        >
       </div>
       <div v-if="opponentHand" id="opponentImage">
-        <img v-if="opponentHand.name=='rock'" src="../assets/rock.png" alt='rock'>
-        <img v-if="opponentHand.name=='paper'" src="../assets/paper.png" alt='paper'>
-        <img v-if="opponentHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
-        <img v-if="opponentHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
-        <img v-if="opponentHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+        <img v-if="opponentHand"
+          :src="getImageUrl(opponentHand.image)" alt='opponent'
+        >
       </div>
     </div>
     <h3 v-if="gameState=='won'" id="result">You win!</h3>
@@ -54,6 +50,10 @@ export default {
     }
   },
   methods: {
+    getImageUrl(image) {
+      return require('../assets/' + image);
+    },
+
     getVerb(left, right) {
       let concatenatedHands = `${left.name} ${right.name}`;
       let verb = '';
@@ -89,6 +89,7 @@ export default {
       }
       return verb;
     },
+
     setGameState() {
       if (this.playerHand.counters.includes(this.opponentHand.name)) {
         this.gameState = 'won';
@@ -100,6 +101,7 @@ export default {
         this.gameState = 'draw';
       }
     },
+
     restartGame() {
       eventBus.$emit('restart-game');
     }

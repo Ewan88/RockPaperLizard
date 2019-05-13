@@ -3,11 +3,9 @@
     <h2>Choosing opponent's hand...</h2>
     <div id="imageContainer">
       <div v-if="playerHand" id="playerImage">
-        <img v-if="playerHand.name=='rock'" src="../assets/rock.png" alt='rock'>
-        <img v-if="playerHand.name=='paper'" src="../assets/paper.png" alt='paper'>
-        <img v-if="playerHand.name=='scissors'" src="../assets/scissors.png" alt='scissors'>
-        <img v-if="playerHand.name=='lizard'" src="../assets/lizard.png" alt='lizard'>
-        <img v-if="playerHand.name=='spock'" src="../assets/spock.png" alt='spock'>
+        <img v-if="playerHand"
+          :src="getImageUrl(playerHand.image)" alt='player'
+        />
       </div>
       <div id="opponentImage">
         <img :src="getImageUrl(currentImage)" alt='opponent'>
@@ -51,8 +49,8 @@ export default {
       return Math.floor(Math.random() * number);
     },
 
-    getImageUrl(imageName) {
-      return require('../assets/' + imageName);
+    getImageUrl(image) {
+      return require('../assets/' + image);
     },
 
     changeImage() {
@@ -61,7 +59,7 @@ export default {
 
       /*
       following block prevents an infinite loop
-      makes 25 recursive calls equating to 2 seconds
+      makes recursive calls for 2 seconds
       */
 
       if (this.imageChanges < 26) {

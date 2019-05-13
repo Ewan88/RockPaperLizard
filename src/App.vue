@@ -40,22 +40,28 @@ export default {
         {
           name: 'rock',
           counters: ['lizard', 'scissors'],
+          image: "rock.png",
+
         },
         {
           name: 'paper',
           counters: ['rock', 'spock'],
+          image: "paper.png",
         },
         {
           name: 'scissors',
           counters: ['paper', 'lizard'],
+          image: "scissors.png",
         },
         {
           name: 'lizard',
           counters: ['spock', 'paper'],
+          image: "lizard.png",
         },
         {
           name: 'spock',
           counters: ['scissors', 'rock'],
+          image: "spock.png",
         }
       ],
       winCount: 0,
@@ -102,11 +108,10 @@ export default {
     flex-direction: column;
     text-align: center;
     padding: 20px;
-    margin: 50px;
+    margin: 0;
     width: 330px;
     height: 460px;
-    border-radius: 30px;
-    box-shadow: 0 0 50px red;
+    box-shadow: 0 50px 100px -40px red;
   }
 
   #gameContainer {
