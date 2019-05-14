@@ -59,7 +59,7 @@ export default {
 
       /*
       following block prevents an infinite loop
-      makes recursive calls for 2 seconds
+      and makes recursive calls for 2 seconds
       */
 
       if (this.imageChanges < 26) {

@@ -1,16 +1,16 @@
 <template>
   <div id="gameContainer">
-    <div v-if="gameState=='won'">
+    <div v-if="gameWon">
       <h2>
         {{playerHand.name[0].toUpperCase() + playerHand.name.substring(1)}}
         {{getVerb(playerHand, opponentHand)}}
         {{opponentHand.name[0].toUpperCase() + opponentHand.name.substring(1)}}
       </h2>
     </div>
-    <div v-if="gameState=='draw'">
+    <div v-if="gameDraw">
       <h2>Draw!</h2>
     </div>
-    <div v-if="gameState=='lost'">
+    <div v-if="gameLost">
       <h2>
         {{opponentHand.name[0].toUpperCase() + opponentHand.name.substring(1)}}
         {{getVerb(opponentHand, playerHand)}}
@@ -18,19 +18,19 @@
       </h2>
     </div>
     <div id="imageContainer">
-      <div v-if="playerHand" id="playerImage">
-        <img v-if="playerHand"
+      <div v-if="playerHand" id="player">
+        <img v-if="playerHand" :class="{'fade': gameLost}"
           :src="getImageUrl(playerHand.image)" alt='player'
         >
       </div>
-      <div v-if="opponentHand" id="opponentImage">
-        <img v-if="opponentHand"
+      <div v-if="opponentHand" id="opponent">
+        <img v-if="opponentHand" :class="{'fade': gameWon}"
           :src="getImageUrl(opponentHand.image)" alt='opponent'
         >
       </div>
     </div>
-    <h3 v-if="gameState=='won'" id="result">You win!</h3>
-    <h3 v-if="gameState=='lost'" id="result">You lose!</h3>
+    <h3 v-if="gameWon" id="result">You win!</h3>
+    <h3 v-if="gameLost" id="result">You lose!</h3>
     <h3 id="restartGameBtn" v-on:click="restartGame">Play Again?</h3>
   </div>
 </template>
@@ -46,7 +46,9 @@ export default {
   },
   data() {
     return {
-      gameState: null,
+      gameWon: false,
+      gameLost: false,
+      gameDraw: false,
     }
   },
   methods: {
@@ -92,13 +94,13 @@ export default {
 
     setGameState() {
       if (this.playerHand.counters.includes(this.opponentHand.name)) {
-        this.gameState = 'won';
+        this.gameWon = true;
         eventBus.$emit('game-won');
       } else if (this.opponentHand.counters.includes(this.playerHand.name)) {
-        this.gameState = 'lost';
+        this.gameLost = true;
         eventBus.$emit('game-lost');
       } else {
-        this.gameState = 'draw';
+        this.gameDraw = true;
       }
     },
 
@@ -123,5 +125,9 @@ export default {
     cursor: pointer;
   }
 
+  .fade {
+    transition-duration: 3s;
+    opacity: 0.5;
+  }
 
 </style>
